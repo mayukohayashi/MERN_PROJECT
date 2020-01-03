@@ -1,0 +1,15 @@
+{
+  "name": "mern-backendside",
+  "version": "1.0.0",
+  "description": "this is backend-side",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "mayuko hayashi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

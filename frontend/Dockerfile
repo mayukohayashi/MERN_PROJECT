@@ -7,4 +7,6 @@ WORKDIR /usr/src/app
 
 COPY package.json package-lock.json* ./
 
+COPY . .
+
 CMD [ "npm", "start" ]
