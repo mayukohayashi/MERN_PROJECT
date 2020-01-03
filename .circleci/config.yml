@@ -3,5 +3,17 @@ jobs:
   build:
     docker:
       - image: circleci/node:13.1.0
-    steps:
-      - run: echo "hello world"
+
+      working_directory: ~/mern-starter
+
+      steps:
+        - checkout
+        - restore_cache:
+            key: node_modules
+        - run:
+            name: Install npm
+            command: npm install
+        - save_cache:
+            key: node_modules
+            paths:
+              - node_modules
