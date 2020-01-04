@@ -1,0 +1,104 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "commonjs": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "window": true,
+    "define": true,
+    "require": true,
+    "module": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "es6": true,
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "prettier"
+  ],
+  "rules": {
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
+    "linebreak-style": ["error", "unix"],
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "parser": "flow"
+    }],
+    "react/jsx-tag-spacing": [2, {
+      "beforeSelfClosing": "always"
+    }],
+    "react/jsx-no-bind": 0,
+    "react/jsx-boolean-value": 0,
+    "react/jsx-closing-bracket-location": 1,
+    "key-spacing": ["error", {
+      "beforeColon": false,
+      "afterColon": true
+    }],
+    // "react/jsx-curly-spacing": ["warn", {
+    //     "when": "never",
+    //     "children": {
+    //     "when": "always"
+    //     }
+    // }],
+    "react/jsx-indent-props": [1, 2],
+    "react/jsx-no-undef": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/prefer-es6-class": 1,
+    "arrow-spacing": "error",
+    "eqeqeq": "error",
+    "generator-star-spacing": ["error", {
+      "before": false,
+      "after": true
+    }],
+    "no-duplicate-imports": "error",
+    "no-eq-null": "error",
+    "no-undefined": "error",
+    "no-useless-computed-key": "error",
+    "no-useless-constructor": "error",
+    "no-useless-rename": "error",
+    "no-var": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "prefer-template": "error",
+    "rest-spread-spacing": "error",
+    "semi": "error",
+    "template-curly-spacing": "error",
+    "yield-star-spacing": "error",
+    "spaced-comment": "off",
+    "consistent-return": "off",
+    "func-names": "off",
+    "no-console": "off",
+    "object-shorthand": "off",
+    "no-process-exit": "off",
+    "no-param-reassign": "off",
+    "no-return-await": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "prefer-destructuring": ["error", {
+      "object": true,
+      "array": false
+    }],
+    "no-unused-vars": ["error", {
+      "argsIgnorePattern": "req|res|next|val"
+    }]
+  }
+}
