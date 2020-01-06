@@ -1,7 +1,13 @@
 import React from 'react';
 
+import Input from '../../shared/components/FormElements/Input';
+
 const NewPlace = () => {
-  return <h2>New Place Page!</h2>;
+  return (
+    <form className="place-form">
+      <Input type="text" label="Title" />
+    </form>
+  );
 };
 
 export default NewPlace;
