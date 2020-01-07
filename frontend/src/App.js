@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import Users from './users/pages/Users';
-import NewPlace from './places/pages/NewPlace/NewPlace';
+import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
 import UpdatePlace from './places/pages/UpdatePlace';
 
