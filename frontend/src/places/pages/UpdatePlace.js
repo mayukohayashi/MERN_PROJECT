@@ -76,17 +76,6 @@ const UpdatePlace = () => {
         value={identifiedPlace.description}
         valid={true}
       />
-      <Input
-        id="address"
-        element="input"
-        type="text"
-        label="Address"
-        validators={[VALIDATOR_REQUIRE()]}
-        errorText="Please enter a valid address."
-        onInput={() => {}}
-        value={identifiedPlace.address}
-        valid={true}
-      />
       <Button type="submit" disabled={true}>
         UPDATE PLACE
       </Button>
