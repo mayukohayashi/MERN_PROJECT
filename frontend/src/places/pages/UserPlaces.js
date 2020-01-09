@@ -19,7 +19,7 @@ const DUMMY_PLACES = [
   },
   {
     id: 'p2',
-    title: '通天閣',
+    title: 'Tsutenkaku',
     description: 'one of the osaka thing',
     imageUrl:
       'https://www.pakutaso.com/shared/img/thumb/AMizuho18116012_TP_V4.jpg',

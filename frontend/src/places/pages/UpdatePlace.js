@@ -11,6 +11,7 @@ import {
 
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/FormElements/Button/Button';
+import Card from '../../shared/components/UIElements//Card/Card';
 
 const DUMMY_PLACES = [
   {
@@ -28,7 +29,7 @@ const DUMMY_PLACES = [
   },
   {
     id: 'p2',
-    title: '通天閣',
+    title: 'Tsutenkaku',
     description: 'one of the osaka thing',
     imageUrl:
       'https://www.pakutaso.com/shared/img/thumb/AMizuho18116012_TP_V4.jpg',
@@ -62,20 +63,22 @@ const UpdatePlace = () => {
   const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
 
   useEffect(() => {
-    setFormData(
-      {
-        title: {
-          value: identifiedPlace.title,
-          isValid: true
+    if (identifiedPlace) {
+      setFormData(
+        {
+          title: {
+            value: identifiedPlace.title,
+            isValid: true
+          },
+          description: {
+            value: identifiedPlace.description,
+            isValid: false
+          }
         },
-        description: {
-          value: identifiedPlace.description,
-          isValid: false
-        }
-      },
-      true
-    );
-    setIsLoading(false)
+        true
+      );
+    }
+    setIsLoading(false);
   }, [setFormData, identifiedPlace]);
 
   const placeUpdateSubmitHandler = event => {
@@ -86,7 +89,9 @@ const UpdatePlace = () => {
   if (!identifiedPlace) {
     return (
       <div className="center">
-        <h2>Could not found place yet!</h2>
+        <Card>
+          <h2>Could not found place yet!</h2>
+        </Card>
       </div>
     );
   }
