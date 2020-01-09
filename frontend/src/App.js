@@ -10,6 +10,7 @@ import Users from './users/pages/Users';
 import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
 import UpdatePlace from './places/pages/UpdatePlace';
+import Auth from './users/pages/Auth/Auth';
 
 import MainNavigation from './shared/components/Navigation/MainNavigation/MainNavigation';
 
@@ -35,7 +36,9 @@ const App = () => {
             <UpdatePlace />
           </Route>
 
-          <Redirect to="/" />
+          <Route to="/auth" exact>
+            <Auth />
+          </Route>
         </Switch>
       </main>
     </Router>
