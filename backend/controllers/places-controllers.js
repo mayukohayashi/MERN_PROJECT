@@ -1,8 +1,9 @@
-const uuid = require('uuid/v4');
 const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const getCordsForAddress = require('../utils/locations');
+
+const PlaceModel = require('../models/place-model');
 
 let DUMMY_PLACES = [
   {
@@ -61,7 +62,7 @@ const createPlace = async (req, res, next) => {
     next(new HttpError('Invalid inputs passed, please check your data', 422));
   }
 
-  const { title, description, address, creator } = req.body;
+  const { title, description, address, creator, createdAt } = req.body;
 
   let coordinates;
   try {
@@ -70,16 +71,23 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  const createdPlace = {
-    id: uuid(),
+  const createdPlace = new PlaceModel({
     title,
     description,
-    location: coordinates,
     address,
-    creator
-  };
+    location: coordinates,
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/d/d9/Nakagin_Capsule_Tower_03.jpg',
+    creator,
+    createdAt
+  });
 
-  DUMMY_PLACES.push(createdPlace); // unshift(createdPlace)
+  try {
+    await createdPlace.save();
+  } catch (err) {
+    const error = new HttpError('Creating place failed❗', 500);
+    return next(error);
+  }
 
   res.status(201).json({ place: createdPlace });
 };
