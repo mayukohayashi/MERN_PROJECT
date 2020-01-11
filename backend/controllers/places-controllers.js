@@ -1,4 +1,5 @@
 const uuid = require('uuid/v4');
+const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 
@@ -52,6 +53,14 @@ const getPlacesByUserId = (req, res, next) => {
 
 // POST /api/places
 const createPlace = (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    res.status(200).json({ message: 'Deleted place.' });
+    throw new HttpError('Invalid inputs passed, please check your data', 422);
+  }
+
   const { title, description, coordinates, address, creator } = req.body;
   // const title = req.body.title...........................
 
