@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 const usersRoutes = require('./routes/users-routes');
 const placesRoutes = require('./routes/places-routes');
@@ -27,6 +28,23 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500);
   res.json({ message: error.message || 'An unknown error occurred👎' });
 });
+
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+
+mongoose
+  .connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('DB connection successful!'))
+  .catch(err => {
+    console.log(err);
+  });
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
