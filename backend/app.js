@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 
 const usersRoutes = require('./routes/users-routes');
 const placesRoutes = require('./routes/places-routes');
 
 const HttpError = require('./models/http-error');
 
+dotenv.config({ path: './config.env' });
 const app = express();
 
 app.use(bodyParser.json());
@@ -26,4 +28,7 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred👎' });
 });
 
-app.listen(6200);
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
+  console.log(`App running on port ${port}...`);
+});
