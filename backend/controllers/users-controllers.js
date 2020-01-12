@@ -1,30 +1,22 @@
-const uuid = require('uuid/v4');
 const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 const UserModel = require('../models/user-model.js');
 
-const DUMMY_USERS = [
-  {
-    id: 'u1',
-    name: 'Mayuko Hayashi',
-    email: 'test@test.com',
-    password: 'password'
+const getUsers = async (req, res, next) => {
+  let users;
+
+  try {
+    users = await UserModel.find({}, '-password');
+  } catch (err) {
+    const error = new HttpError(
+      'Fetching users failed, please try again later',
+      500
+    );
+    return next(error);
   }
-];
 
-const getUsers = (req, res, next) => {
-  // const userId = req.params.uid;
-
-  // const users = DUMMY_USERS.filter(u => {
-  //   return u.name === userId;
-  // });
-
-  // if (!users || users.length === 0) {
-  //   return next(new HttpError('Could not find users', 404));
-  // }
-
-  res.json({ users: DUMMY_USERS });
+  res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
 
 const signUp = async (req, res, next) => {
