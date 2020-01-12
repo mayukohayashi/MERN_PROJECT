@@ -72,7 +72,9 @@ const createPlace = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     console.log(errors);
-    next(new HttpError('Invalid inputs passed, please check your data', 422));
+    return next(
+      new HttpError('Invalid inputs passed, please check your data.', 422)
+    );
   }
 
   const { title, description, address, creator, createdAt } = req.body;
@@ -120,7 +122,6 @@ const createPlace = async (req, res, next) => {
     user.places.push(createdPlace);
     await user.save({ session: sess });
     await sess.commitTransaction();
-
   } catch (err) {
     const error = new HttpError('Creating place failed❗', 500);
 
@@ -136,7 +137,7 @@ const updatePlace = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     return next(
-      HttpError('Invalid inputs passed, please check your data', 422)
+      new HttpError('Invalid inputs passed, please check your data', 422)
     );
   }
 
@@ -179,7 +180,7 @@ const deletePlace = async (req, res, next) => {
 
   let place;
   try {
-    place = await PlaceModel.findById(placeId);
+    place = await PlaceModel.findById(placeId).populate('creator');
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not delete place...❗',
@@ -189,8 +190,18 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
+  if (!place) {
+    const error = new HttpError('Could not find place for this ID', 404);
+    return next(error);
+  }
+
   try {
-    await place.remove();
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await place.remove({ session: sess });
+    place.creator.places.pull(place);
+    await place.creator.save({ session: sess });
+    await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not delete place...❗',
