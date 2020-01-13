@@ -13,7 +13,7 @@ import {
 import Card from '../../../shared/components/UIElements/Card/Card';
 import Input from '../../../shared/components/FormElements/Input/Input';
 import Button from '../../../shared/components/FormElements/Button/Button';
-import ErrorModal from '../../../shared/components/UIElements/ErrorModal/ErrorModal';
+import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
 const Auth = () => {
