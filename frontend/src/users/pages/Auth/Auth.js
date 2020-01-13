@@ -13,6 +13,8 @@ import {
 import Card from '../../../shared/components/UIElements/Card/Card';
 import Input from '../../../shared/components/FormElements/Input/Input';
 import Button from '../../../shared/components/FormElements/Button/Button';
+import ErrorModal from '../../../shared/components/UIElements/ErrorModal/ErrorModal';
+import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
 const Auth = () => {
   const auth = useContext(AuthContext);
@@ -81,7 +83,6 @@ const Auth = () => {
         const responseData = await response.json();
         console.log(responseData);
         auth.Login();
-
       } catch (err) {
         console.log(err);
         setError(err.message || 'Something went wrong, please try again');
@@ -92,6 +93,7 @@ const Auth = () => {
 
   return (
     <Card className="authentication">
+      {isLoading && <LoadingSpinner asOverlay />}
       <h2>Login Required</h2>
       <hr />
       <form onSubmit={authSubmitHandler}>
