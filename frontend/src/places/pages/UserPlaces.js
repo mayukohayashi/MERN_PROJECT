@@ -1,44 +1,42 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 import PlaceList from '../../places/components/PlaceList/PlaceList';
-
-const DUMMY_PLACES = [
-  {
-    id: 'p1',
-    title: '通天閣',
-    description: 'one of the osaka thing',
-    imageUrl:
-      'https://www.pakutaso.com/shared/img/thumb/AMizuho18116012_TP_V4.jpg',
-    address: '556-0002 大阪府大阪市浪速区恵美須東１丁目１８−６',
-    location: {
-      lat: 34.6524992,
-      lng: 135.5063058
-    },
-    creator: 'u1'
-  },
-  {
-    id: 'p2',
-    title: 'Tsutenkaku',
-    description: 'one of the osaka thing',
-    imageUrl:
-      'https://www.pakutaso.com/shared/img/thumb/AMizuho18116012_TP_V4.jpg',
-    address: '556-0002 大阪府大阪市浪速区恵美須東１丁目１８−６',
-    location: {
-      lat: 34.6524992,
-      lng: 135.5063058
-    },
-    creator: 'u2'
-  }
-];
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
 const UserPlaces = () => {
+  const [loadedPlaces, setLoadedPlaces] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
   const { userId } = useParams();
-  // const userId = userParams().userId
 
-  const loadedPlaces = DUMMY_PLACES.filter(place => place.creator === userId);
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:6200/api/places/user/${userId}`
+        );
+        setLoadedPlaces(responseData.places);
+      } catch (err) {}
+    };
 
-  return <PlaceList items={loadedPlaces} />;
+    fetchPlaces();
+  }, [sendRequest, userId]);
+
+  return (
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} />}
+    </React.Fragment>
+  );
 };
 
 export default UserPlaces;
