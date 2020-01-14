@@ -23,8 +23,6 @@ const signUp = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    
-
     return next(
       new HttpError('Invalid inputs passed, please check your data', 422)
     );
@@ -53,7 +51,7 @@ const signUp = async (req, res, next) => {
   const createdUser = new UserModel({
     name,
     email,
-    image: 'https://image.flaticon.com/icons/png/512/64/64572.png',
+    image: req.file.path,
     password,
     places: []
   });
