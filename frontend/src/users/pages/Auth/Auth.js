@@ -14,6 +14,7 @@ import {
 import Card from '../../../shared/components/UIElements/Card/Card';
 import Input from '../../../shared/components/FormElements/Input/Input';
 import Button from '../../../shared/components/FormElements/Button/Button';
+import ImageUpload from '../../../shared/components/FormElements/ImageUpload/ImageUpload';
 import ErrorModal from '../../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/LoadingSpinner/LoadingSpinner';
 
@@ -118,6 +119,7 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
+          {!isLoginMode && <ImageUpload center id="image" />}
           <Input
             element="input"
             id="email"
