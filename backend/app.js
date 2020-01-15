@@ -17,10 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // image
-app.use(
-  '/uploads/images/users',
-  express.static(path.join('uploads', 'images', 'users'))
-);
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 // for CORS
 app.use((req, res, next) => {

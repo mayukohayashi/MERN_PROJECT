@@ -93,8 +93,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/d/d9/Nakagin_Capsule_Tower_03.jpg',
+    image: req.file.path,
     creator,
     createdAt
   });
