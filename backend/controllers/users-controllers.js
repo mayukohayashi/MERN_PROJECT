@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const HttpError = require('../models/http-error');
 const UserModel = require('../models/user-model.js');
@@ -69,10 +70,27 @@ const signUp = async (req, res, next) => {
     await createdUser.save();
   } catch (err) {
     const error = new HttpError('Signing up failed❗', 500);
+
     return next(error);
   }
 
-  res.status(201).json({ user: createdUser.toObject({ getters: true }) });
+  let token;
+
+  try {
+    token = jwt.sign(
+      { userId: createdUser.id, email: createdUser.email },
+      'secret_not_to_share',
+      { expiresIn: '1h' }
+    );
+  } catch (err) {
+    const error = new HttpError('Signing up failed❗', 500);
+
+    return next(error);
+  }
+
+  res
+    .status(201)
+    .json({ user: createdUser.id, email: createdUser.email, token: token });
 };
 
 const logIn = async (req, res, next) => {
@@ -118,6 +136,7 @@ const logIn = async (req, res, next) => {
 
     return next(error);
   }
+  
 
   res.json({
     message: 'Logged IN!',
