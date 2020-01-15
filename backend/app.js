@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -14,6 +15,12 @@ dotenv.config({ path: './config.env' });
 const app = express();
 
 app.use(bodyParser.json());
+
+// image
+app.use(
+  '/uploads/images/users',
+  express.static(path.join('uploads', 'images', 'users'))
+);
 
 // for CORS
 app.use((req, res, next) => {
