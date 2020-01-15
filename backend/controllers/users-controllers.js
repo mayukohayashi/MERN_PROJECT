@@ -136,11 +136,25 @@ const logIn = async (req, res, next) => {
 
     return next(error);
   }
-  
+
+  let token;
+
+  try {
+    token = jwt.sign(
+      { userId: existingUser.id, email: existingUser.email },
+      'secret_not_to_share',
+      { expiresIn: '1h' }
+    );
+  } catch (err) {
+    const error = new HttpError('Logging in failed❗', 500);
+
+    return next(error);
+  }
 
   res.json({
-    message: 'Logged IN!',
-    user: existingUser.toObject({ getters: true })
+    userId: existingUser.id,
+    email: existingUser.email,
+    token: token
   });
 };
 
