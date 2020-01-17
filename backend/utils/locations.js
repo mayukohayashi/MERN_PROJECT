@@ -6,7 +6,7 @@ async function getCordsForAddress(address) {
   const response = await axios.get(
     `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
       address
-    )}&key=${process.env.REACT_APP_GOOGLE_MAP_POINT}`
+    )}&key=${process.env.GOOGLE_MAP_POINT}`
   );
 
   const data = response.data;
