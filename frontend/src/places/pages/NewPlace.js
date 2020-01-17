@@ -60,7 +60,7 @@ const NewPlace = () => {
         Authorization: `Bearer ${auth.token}`
       });
 
-      history.push('/');
+      history.push(`/${auth.userId}/places`);
     } catch (err) {}
   };
 
