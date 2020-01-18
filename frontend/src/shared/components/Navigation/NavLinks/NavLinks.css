@@ -18,24 +18,39 @@
   border: 1px solid transparent;
   color: #292929;
   text-decoration: none;
+  font-family: 'Open Sans Condensed';
+  text-transform: uppercase;
+  /* font-weight: bolder; */
+  font-size: 18px;
   padding: 0.5rem;
 }
 
 .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
-  background: #f8df00;
-  border-color: #292929;
-  color: #292929;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+
 }
 
 .nav-links button {
+  min-width: 165px;
+  width: auto;
+  height: 50px;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 35px 0 35px;
+  font-size: 18px;
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Open Sans Condensed';
+  font-weight: bolder;
+  border: none;
   cursor: pointer;
-  border: 1px solid #292929;
-  color: #292929;
-  background: transparent;
-  padding: 0.5rem;
-  font: inherit;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-links button:focus {
@@ -58,19 +73,20 @@
   }
 
   .nav-links a {
-    color: white;
+    /* color: white; */
     text-decoration: none;
   }
 
   .nav-links button {
-    border: 1px solid white;
-    color: white;
-    background: transparent;
+    /* color: white; */
+    background: white;
+    color: #292929;
+
   }
 
   .nav-links button:hover,
   .nav-links button:active {
-    background: #f8df00;
+    background: white;
     color: #292929;
   }
 }
