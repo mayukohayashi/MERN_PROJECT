@@ -12,7 +12,7 @@ const getUsers = async (req, res, next) => {
     users = await UserModel.find({}, '-password');
   } catch (err) {
     const error = new HttpError(
-      'Fetching users failed, please try again later',
+      'Fetching users failed, please try again later.',
       500
     );
     return next(error);
@@ -26,7 +26,7 @@ const signUp = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     return next(
-      new HttpError('Invalid inputs passed, please check your data', 422)
+      new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
 
@@ -36,14 +36,17 @@ const signUp = async (req, res, next) => {
   try {
     existingUser = await UserModel.findOne({ email: email });
   } catch (err) {
-    const error = new HttpError('Signing up failed, please try again❗', 500);
+    const error = new HttpError(
+      'Signing up failed, please try again later❗',
+      500
+    );
 
     return next(error);
   }
 
   if (existingUser) {
     const error = new HttpError(
-      'User exists already, please login instead',
+      'User exists already, please login instead.',
       422
     );
 
@@ -54,7 +57,10 @@ const signUp = async (req, res, next) => {
   try {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
-    const error = new HttpError('Could not create user, please try again', 500);
+    const error = new HttpError(
+      'Could not create user, please try again.',
+      500
+    );
     return next(error);
   }
 
@@ -69,7 +75,10 @@ const signUp = async (req, res, next) => {
   try {
     await createdUser.save();
   } catch (err) {
-    const error = new HttpError('Signing up failed❗', 500);
+    const error = new HttpError(
+      'Signing up failed❗ please try again later.',
+      500
+    );
 
     return next(error);
   }
@@ -90,7 +99,7 @@ const signUp = async (req, res, next) => {
 
   res
     .status(201)
-    .json({ user: createdUser.id, email: createdUser.email, token: token });
+    .json({ userId: createdUser.id, email: createdUser.email, token: token });
 };
 
 const logIn = async (req, res, next) => {
@@ -121,7 +130,7 @@ const logIn = async (req, res, next) => {
     isValidPassword = await bcrypt.compare(password, existingUser.password);
   } catch (err) {
     const error = new HttpError(
-      'Could not log you in, please check your credentials and try again',
+      'Could not log you in, please check your credentials and try again.',
       500
     );
 

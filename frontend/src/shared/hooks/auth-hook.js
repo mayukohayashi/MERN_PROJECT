@@ -11,17 +11,17 @@ export const useAuth = () => {
     setToken(token);
     setUserId(uid);
 
-    const logInTokenExpirationDate =
+    const tokenExpirationDate =
       expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
 
-    setTokenExpirationDate(logInTokenExpirationDate);
+    setTokenExpirationDate(tokenExpirationDate);
 
     localStorage.setItem(
       'userData',
       JSON.stringify({
         userId: uid,
         token: token,
-        expiration: logInTokenExpirationDate.toISOString()
+        expiration: tokenExpirationDate.toISOString()
       })
     );
   }, []);

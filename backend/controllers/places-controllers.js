@@ -75,7 +75,6 @@ const createPlace = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log(errors);
     return next(
       new HttpError('Invalid inputs passed, please check your data.', 422)
     );
@@ -140,7 +139,7 @@ const updatePlace = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     return next(
-      new HttpError('Invalid inputs passed, please check your data', 422)
+      new HttpError('Invalid inputs passed, please check your data.', 422)
     );
   }
 
@@ -210,7 +209,7 @@ const deletePlace = async (req, res, next) => {
   if (place.creator.id !== req.userData.userId) {
     const error = new HttpError(
       'You are not allowed to delete this place.',
-      403
+      401
     );
 
     return next(error);

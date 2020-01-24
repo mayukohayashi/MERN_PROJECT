@@ -1,13 +1,13 @@
 const express = require('express');
 const { check } = require('express-validator');
 
-const usersControllers = require('../controllers/users-controllers');
+const usersController = require('../controllers/users-controllers');
 
 const fileUpload = require('../middleware/file-upload');
 
 const router = express.Router();
 
-router.get('/', usersControllers.getUsers);
+router.get('/', usersController.getUsers);
 
 router.post(
   '/signup',
@@ -21,8 +21,8 @@ router.post(
       .isEmail(),
     check('password').isLength({ min: 6 })
   ],
-  usersControllers.signUp
+  usersController.signUp
 );
-router.post('/login', usersControllers.logIn);
+router.post('/login', usersController.logIn);
 
 module.exports = router;
