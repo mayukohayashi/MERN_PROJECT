@@ -1,4 +1,4 @@
-version: '2.2'
+version: "2.2"
 
 services:
   mongodb:
@@ -6,7 +6,9 @@ services:
     ports:
       - "27017:27017"
   backend:
-    build: ./backend/
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile-dev
     ports:
       - "6200:6200"
     volumes:
@@ -14,7 +16,9 @@ services:
     depends_on:
       - mongodb
   frontend:
-    build: ./frontend/
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile-dev
     ports:
       - "3000:3000"
     volumes:
