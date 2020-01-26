@@ -51,10 +51,13 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred👎' });
 });
 
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
+const DB = process.env.DATABASE
+  .replace(
+    '<PASSWORD>',
+      process.env.DATABASE_PASSWORD)
+  .replace(
+    '<USERNAME>',
+    process.env.DATABASE_USERNAME);
 
 mongoose
   .connect(DB, {
