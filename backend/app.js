@@ -51,13 +51,10 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred👎' });
 });
 
-const DB = process.env.DATABASE
-  .replace(
-    '<PASSWORD>',
-      process.env.DATABASE_PASSWORD)
-  .replace(
-    '<USERNAME>',
-    process.env.DATABASE_USERNAME);
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+).replace('<USERNAME>', process.env.DATABASE_USERNAME);
 
 mongoose
   .connect(DB, {
@@ -72,6 +69,7 @@ mongoose
   });
 
 const port = process.env.PORT || 3000;
+// eslint-disable-next-line no-unused-vars
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });

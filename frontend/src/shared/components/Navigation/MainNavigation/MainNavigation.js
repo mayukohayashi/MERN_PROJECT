@@ -8,7 +8,7 @@ import NavLinks from '../NavLinks/NavLinks';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import Backdrop from '../../UIElements/Backdrop/Backdrop';
 
-const MainNavigation = props => {
+const MainNavigation = () => {
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const openDrawerHandler = () => {
@@ -38,7 +38,7 @@ const MainNavigation = props => {
           <span />
         </button>
         <h1 className="main-navigation__title">
-          <Link to="/">Dayz-BA</Link>
+          <Link to="/">BASHO</Link>
         </h1>
         <nav className="main-navigation__header-nav">
           <NavLinks />
