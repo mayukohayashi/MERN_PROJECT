@@ -74,6 +74,7 @@
     "no-useless-constructor": "error",
     "no-useless-rename": "error",
     "no-var": "error",
+    "no-empty": "off",
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
     "prefer-rest-params": "error",

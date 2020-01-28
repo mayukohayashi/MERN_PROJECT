@@ -5,7 +5,7 @@ import './NavLinks.css';
 
 import { AuthContext } from '../../../contexts/auth-context';
 
-const NavLinks = props => {
+const NavLinks = () => {
   const auth = useContext(AuthContext);
 
   return (

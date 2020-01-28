@@ -3,6 +3,7 @@ import { useCallback, useReducer } from 'react';
 const formReducer = (state, action) => {
   switch (action.type) {
     case 'INPUT_CHANGE':
+      // eslint-disable-next-line no-case-declarations
       let formIsValid = true;
       for (const inputId in state.inputs) {
         if (!state.inputs[inputId]) {
