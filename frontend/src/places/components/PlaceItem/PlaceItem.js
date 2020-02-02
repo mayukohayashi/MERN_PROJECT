@@ -59,7 +59,7 @@ const PlaceItem = props => {
         footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
       >
         <div className="map-container">
-          <Map center={props.coordinates} zoom={100} />
+          <Map center={props.coordinates} zoom={16} />
         </div>
       </Modal>
 
@@ -67,7 +67,7 @@ const PlaceItem = props => {
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Are you sure?"
-        footerClass="place-item__modal-action"
+        footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelDeleteHandler}>

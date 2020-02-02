@@ -53,7 +53,7 @@ const UpdatePlace = () => {
             },
             description: {
               value: responseData.place.description,
-              isValid: false
+              isValid: true
             }
           },
           true
@@ -121,7 +121,7 @@ const UpdatePlace = () => {
           />
           <Input
             id="description"
-            element="text"
+            element="textarea"
             label="Description"
             validators={[VALIDATOR_MINLENGTH(5)]}
             errorText="Please enter a valid description. (at least 5 characters)"
