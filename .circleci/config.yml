@@ -58,4 +58,6 @@ workflows:
   default:
     jobs:
       - lint
-      - test
+      - test:
+          requires:
+            - lint

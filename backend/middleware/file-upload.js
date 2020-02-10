@@ -7,7 +7,6 @@ const MIME_TYPE_MAP = {
   'image/jpg': 'jpg'
 };
 
-
 const fileUpload = multer({
   limits: 500000,
 
