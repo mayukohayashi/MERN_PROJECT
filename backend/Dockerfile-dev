@@ -7,8 +7,7 @@ WORKDIR /usr/src/app
 
 COPY package.json package-lock.json* ./
 
-RUN npm install -g nodemon
-
+RUN npm cache clean --force && npm install && npm install -g nodemon
 COPY . .
 
 CMD ["npm", "run", "dev"]
